@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Disney Halloween Foodie Checklist 2025 - Track your spooky Disney food adventures at Disneyland Resort">
+    <meta name="keywords" content="Disney, Halloween, Disneyland, food, foodie, checklist, pumpkin, treats">
+    <meta name="author" content="Disney Foodie Guide">
+    
+    <!-- SEO and Social Media Meta Tags -->
+    <meta property="og:title" content="Disney Halloween Foodie Checklist 2025">
+    <meta property="og:description" content="Your ultimate guide to Disney's Halloween treats and seasonal offerings at Disneyland Resort">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://example.com/disney-foodie-og-image.jpg">
+    <meta property="og:url" content="https://example.com/disney-foodie">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Disney Halloween Foodie Checklist 2025">
+    <meta name="twitter:description" content="Your ultimate guide to Disney's Halloween treats and seasonal offerings at Disneyland Resort">
+    <meta name="twitter:image" content="https://example.com/disney-foodie-twitter-image.jpg">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#fb923c">
+    <meta name="msapplication-TileColor" content="#fb923c">
+    
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    
+    <title>Disney Halloween Foodie Checklist 2025</title>
+    
+    <!-- External CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Preload critical fonts for better performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Creepster&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="manifest.json">
+</head>
+<body class="text-gray-200 m-0 p-0">
+    <!-- Atmospheric Background -->
+    <div class="moving-gradient"></div>
+    <div class="atmospheric-bg">
+        <div class="fog-layer"></div>
+        <div class="fog-layer"></div>
+        <div class="fog-layer"></div>
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
+    
+    <!-- Floating Halloween Particles -->
+    <div class="halloween-particles" id="halloween-particles"></div>
+
+    <!-- Welcome Modal -->
+    <div id="welcome-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Welcome!</h2>
+                <p class="text-gray-300">Your Disney Halloween Foodie Adventure Starts Here</p>
+            </div>
+            <div class="modal-body">
+                <ul class="instruction-list">
+                    <li><strong>Check off items</strong> as you try them - tap the pumpkin or text area!</li>
+                    <li><strong>Search & Filter</strong> to find specific foods or browse by location</li>
+                    <li><strong>Remove items</strong> by tapping X button or swiping left on mobile (you can undo!)</li>
+                    <li><strong>Collapse sections</strong> by clicking the park headers to focus on what you want</li>
+                    <li><strong>Track your progress</strong> with the spooky blood progress bar and counters</li>
+                    <li><strong>End dates shown</strong> - some items are only available for limited time!</li>
+                    <li><strong>Use "Restore All"</strong> to reset everything if you want to start fresh</li>
+                </ul>
+                <p class="text-center text-gray-400 text-sm mt-4">
+                    <em>Have a magical and spooky foodie adventure! 🎃✨</em>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-button primary" onclick="closeWelcomeModal()">Let's Eat! 🎃</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button id="scroll-to-top" aria-label="Scroll to top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 20V4M4 12l8-8 8 8"/>
+        </svg>
+    </button>
+
+    <!-- Info Button -->
+    <button id="info-icon" aria-label="Show instructions" onclick="showWelcomeModal()" title="Show Instructions">
+        ℹ️
+    </button>
+
+    <!-- Warning Modal -->
+    <div id="warning-modal">
+        <div class="warning-modal-content">
+            <div class="warning-icon">⚠️</div>
+            <h2 class="warning-title">Hold Up!</h2>
+            <div class="warning-message">
+                <p>This will <strong>permanently delete</strong> all your progress and reset the entire checklist!</p>
+                <p>All checked items, removed items, and preferences will be lost forever.</p>
+                <p><strong>Are you absolutely sure?</strong></p>
+            </div>
+            <div class="warning-buttons">
+                <button class="warning-button cancel" onclick="closeWarningModal()">Cancel</button>
+                <button class="warning-button confirm" onclick="confirmRestoreAll()">Yes, Reset Everything!</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="w-full">
+        <!-- Header Section -->
+        <div id="header-container" class="px-1 py-2">
+            <header class="text-center mb-6">
+                <h1 class="title-font text-5xl sm:text-6xl md:text-7xl text-orange-500 tracking-wider leading-tight">Disney Halloween<br>Foodie Guide 2025</h1>
+            </header>
+
+            <div class="flex flex-col gap-3 mx-0">
+                <!-- Overall Progress (Mobile) -->
+                <div id="overall-progress" class="block md:hidden" onclick="toggleMobileStats()">
+                    <div class="text-xl text-orange-400 mb-2">
+                        🎃 Foodie Progress 
+                        <span class="expand-icon">🔽</span>
+                    </div>
+                    
+                    <!-- Spooky Progress Bar -->
+                    <div class="progress-container">
+                        <div id="mobile-progress-bar" class="progress-bar" style="width: 0%;"></div>
+                        <div class="progress-text">
+                            <span id="mobile-all-checked">0</span>/<span id="mobile-all-total">0</span>
+                            (<span id="mobile-all-percentage">0</span>%)
+                        </div>
+                    </div>
+                    
+                    <div class="text-sm text-gray-400 text-center">Tap to view location breakdown</div>
+                </div>
+
+                <!-- Stats Grid -->
+                <div id="stats-grid" class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    <div class="p-3 rounded-lg hidden md:block">
+                        <div class="flex items-center justify-between">
+                            <div class="text-lg text-orange-400">All Locations</div>
+                            <div class="text-purple-300">
+                                <span id="all-checked">0</span>/<span id="all-total">0</span>
+                                <span class="text-sm text-purple-400">(<span id="all-percentage">0</span>%)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-3 rounded-lg">
+                        <div class="flex items-center justify-between">
+                            <div class="text-lg text-orange-400">Disneyland Park</div>
+                            <div class="text-purple-300">
+                                <span id="disneyland-park-checked">0</span>/<span id="disneyland-park-total">0</span>
+                                <span class="text-sm text-purple-400">(<span id="disneyland-park-percentage">0</span>%)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-3 rounded-lg">
+                        <div class="flex items-center justify-between">
+                            <div class="text-lg text-orange-400">California Adventure</div>
+                            <div class="text-purple-300">
+                                <span id="disney-california-adventure-park-checked">0</span>/<span id="disney-california-adventure-park-total">0</span>
+                                <span class="text-sm text-purple-400">(<span id="disney-california-adventure-park-percentage">0</span>%)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-3 rounded-lg">
+                        <div class="flex items-center justify-between">
+                            <div class="text-lg text-orange-400">Hotels</div>
+                            <div class="text-purple-300">
+                                <span id="hotels-of-the-disneyland-resort-checked">0</span>/<span id="hotels-of-the-disneyland-resort-total">0</span>
+                                <span class="text-sm text-purple-400">(<span id="hotels-of-the-disneyland-resort-percentage">0</span>%)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-3 rounded-lg">
+                        <div class="flex items-center justify-between">
+                            <div class="text-lg text-orange-400">Downtown Disney</div>
+                            <div class="text-purple-300">
+                                <span id="downtown-disney-checked">0</span>/<span id="downtown-disney-total">0</span>
+                                <span class="text-sm text-purple-400">(<span id="downtown-disney-percentage">0</span>%)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-3 rounded-lg">
+                        <div class="flex items-center justify-between">
+                            <div class="text-lg text-orange-400">Halloween Candy</div>
+                            <div class="text-purple-300">
+                                <span id="halloween-candy-checked">0</span>/<span id="halloween-candy-total">0</span>
+                                <span class="text-sm text-purple-400">(<span id="halloween-candy-percentage">0</span>%)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Search and Controls -->
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4" style="
+                    border: 2px solid;
+                    border-image: linear-gradient(135deg, #fb923c, #a855f7, #fb923c) 1;
+                    background: 
+                        linear-gradient(135deg, rgba(251, 146, 60, 0.06) 0%, transparent 50%),
+                        linear-gradient(45deg, rgba(168, 85, 247, 0.04) 0%, transparent 50%),
+                        linear-gradient(135deg, rgba(31, 41, 55, 0.9) 0%, rgba(55, 65, 81, 0.95) 50%, rgba(31, 41, 55, 0.9) 100%);
+                    margin: 0.25rem 0 0.75rem 0;
+                    padding: 0.75rem;
+                    border-radius: 0.75rem;
+                    backdrop-filter: blur(10px);
+                    box-shadow: 
+                        0 8px 16px rgba(0, 0, 0, 0.3),
+                        0 0 12px rgba(251, 146, 60, 0.15),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+                ">
+                    <div class="flex flex-col sm:flex-row gap-4 flex-grow w-full">
+                        <div class="relative flex-grow">
+                            <input type="text" id="search-input" placeholder="🎃 Search for spooky treats..." class="w-full themed-input pr-10">
+                            <button id="clear-search" class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-orange-400 transition-colors duration-200 opacity-0" style="display: none;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
+                            </button>
+                        </div>
+                        <select id="park-filter" class="themed-select">
+                            <option value="all">All Locations</option>
+                            <option value="disneyland-park">Disneyland Park</option>
+                            <option value="disney-california-adventure-park">Disney California Adventure Park</option>
+                            <option value="hotels-of-the-disneyland-resort">Hotels</option>
+                            <option value="downtown-disney">Downtown Disney</option>
+                            <option value="halloween-candy">Halloween Candy</option>
+                        </select>
+                    </div>
+                    <div class="flex gap-4">
+                        <button id="undo-button" class="action-button" disabled>Undo</button>
+                        <button id="restore-button" class="action-button">Restore All</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main id="checklist-container" class="px-1">
+            <!-- Sections will be dynamically added here -->
+        </main>
+    </div>
+
+    <!-- External JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
